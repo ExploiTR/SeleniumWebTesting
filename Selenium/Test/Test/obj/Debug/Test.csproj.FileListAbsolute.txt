@@ -1,0 +1,11 @@
+C:\Users\stax\source\repos\Test\Test\bin\Debug\Test.exe.config
+C:\Users\stax\source\repos\Test\Test\bin\Debug\Test.exe
+C:\Users\stax\source\repos\Test\Test\bin\Debug\Test.pdb
+C:\Users\stax\source\repos\Test\Test\bin\Debug\WebDriver.dll
+C:\Users\stax\source\repos\Test\Test\bin\Debug\WebDriver.Support.dll
+C:\Users\stax\source\repos\Test\Test\obj\Debug\Test.csproj.AssemblyReference.cache
+C:\Users\stax\source\repos\Test\Test\obj\Debug\Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\stax\source\repos\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+C:\Users\stax\source\repos\Test\Test\obj\Debug\Test.csproj.CopyComplete
+C:\Users\stax\source\repos\Test\Test\obj\Debug\Test.exe
+C:\Users\stax\source\repos\Test\Test\obj\Debug\Test.pdb
