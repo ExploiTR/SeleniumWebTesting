@@ -24,9 +24,24 @@ namespace Test
                 break;
             }
 
+            Thread.Sleep(250);
+
+         //   String curWin = driver.CurrentWindowHandle;
+
             driver.Close();
 
+            Thread.Sleep(500);
 
+        //    driver.SwitchTo().Window(curWin);
+
+        //   Console.WriteLine(driver.CurrentWindowHandle); // no such window : target window already closed
+        //    Console.WriteLine(driver.Title); // failed to read descriptor
+
+          //  Console.ReadKey();
+
+            Thread.Sleep(2000);
+
+            driver.Quit();
         }
     }
 }
