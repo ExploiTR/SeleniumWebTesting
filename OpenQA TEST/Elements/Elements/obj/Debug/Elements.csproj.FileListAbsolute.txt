@@ -1,0 +1,15 @@
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Elements.exe.config
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Elements.exe
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Elements.pdb
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\WebDriver.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\WebDriver.Support.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\obj\Debug\Elements.csproj.AssemblyReference.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\obj\Debug\Elements.csproj.SuggestedBindingRedirects.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\obj\Debug\Elements.csproj.CoreCompileInputs.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\obj\Debug\Elements.csproj.CopyComplete
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\obj\Debug\Elements.exe
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\obj\Debug\Elements.pdb
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\OpenQA TEST\Elements\Elements\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
