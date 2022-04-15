@@ -1,0 +1,11 @@
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\bin\Debug\Fast.com.exe.config
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\bin\Debug\Fast.com.exe
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\bin\Debug\Fast.com.pdb
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\bin\Debug\WebDriver.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\bin\Debug\WebDriver.Support.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\obj\Debug\Fast.com.csproj.AssemblyReference.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\obj\Debug\Fast.com.csproj.SuggestedBindingRedirects.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\obj\Debug\Fast.com.csproj.CoreCompileInputs.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\obj\Debug\Fast.com.csproj.CopyComplete
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\obj\Debug\Fast.com.exe
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Personal Test Codes\Fast.com\Fast.com\obj\Debug\Fast.com.pdb
