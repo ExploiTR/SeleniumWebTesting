@@ -1,0 +1,10 @@
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\bin\Debug\BasicXPath.exe.config
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\bin\Debug\BasicXPath.exe
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\bin\Debug\BasicXPath.pdb
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\bin\Debug\WebDriver.dll
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\obj\Debug\BasicXPath.csproj.AssemblyReference.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\obj\Debug\BasicXPath.csproj.SuggestedBindingRedirects.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\obj\Debug\BasicXPath.csproj.CoreCompileInputs.cache
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\obj\Debug\BasicXPath.csproj.CopyComplete
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\obj\Debug\BasicXPath.exe
+C:\Users\ExploiTR\Documents\GitHub\BassettiCodes\Labdatest\BasicXPath\BasicXPath\obj\Debug\BasicXPath.pdb
