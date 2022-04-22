@@ -72,30 +72,41 @@ namespace Main
                 IWebElement element25th = fromContainer.FindElement(By.XPath("//td[@class='day ' and text()=25]"));
                 element25th.Click();
 
+                driver.SwitchTo().ActiveElement();
+
+                driver.FindElement(By.XPath("//section[starts-with(@class,'info-area')]")).Click();
+
+                Thread.Sleep(1000);
+
                 IWebElement toDate = driver.FindElement(By.XPath("//input[@id='checkout']"));
-                ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click()", toDate);
+                toDate.Click();
+
+                Thread.Sleep(1000);
+
+                driver.SwitchTo().ActiveElement();
 
                 Thread.Sleep(1000);
 
                 IWebElement toContainer = driver.FindElement(By.XPath("//div[contains(@class,'dropdown-menu') and contains(@style,'block')]"));
-                //  driver.SwitchTo().Frame(toContainer);
-
-                new Actions(driver).MoveToElement(toContainer).Perform();
 
                 Console.WriteLine(toContainer.GetAttribute("innerHTML"));
 
                 Thread.Sleep(1000);
 
-            /*    IWebElement nextMon2 = toContainer.FindElement(By.XPath("//th[@class='next']"));
+           //    IWebElement nextMon2 = toContainer.FindElement(By.XPath("//th[@class='next']"));
+
+           //     Thread.Sleep(1000);
+
+         //       nextMon2.Click();
+
+           //     Thread.Sleep(1000);
+
+                IWebElement element30th = toContainer.FindElement(By.XPath("//td[@class='day ' and text()=30]"));
+                element30th.Click();
 
                 Thread.Sleep(1000);
 
-                nextMon2.Click();
-
-                Thread.Sleep(1000);
-
-                IWebElement element24th = toContainer.FindElement(By.XPath("//td[@class='day ' and text()=27]"));
-                element24th.Click();*/
+                driver.SwitchTo().ActiveElement();
 
                 driver.FindElement(By.XPath("//a[contains(@class,'travellers') and contains(@class,'dropdown-toggle')]")).Click();
 
@@ -121,7 +132,7 @@ namespace Main
 
                 Thread.Sleep(1000);
 
-                driver.FindElement(By.XPath("//div[contains(@class,'btn-search')]")).Click();    
+                driver.FindElement(By.XPath("//div[contains(@class,'btn-search')]")).Click();
 
                 Thread.Sleep(5000);
                 driver.Quit();
