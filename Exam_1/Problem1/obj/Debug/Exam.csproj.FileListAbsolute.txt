@@ -1,8 +1,0 @@
-C:\Users\stax\source\repos\Exam\Exam\bin\Debug\Exam.exe.config
-C:\Users\stax\source\repos\Exam\Exam\bin\Debug\Exam.exe
-C:\Users\stax\source\repos\Exam\Exam\bin\Debug\Exam.pdb
-C:\Users\stax\source\repos\Exam\Exam\obj\Debug\Exam.csproj.AssemblyReference.cache
-C:\Users\stax\source\repos\Exam\Exam\obj\Debug\Exam.csproj.SuggestedBindingRedirects.cache
-C:\Users\stax\source\repos\Exam\Exam\obj\Debug\Exam.csproj.CoreCompileInputs.cache
-C:\Users\stax\source\repos\Exam\Exam\obj\Debug\Exam.exe
-C:\Users\stax\source\repos\Exam\Exam\obj\Debug\Exam.pdb

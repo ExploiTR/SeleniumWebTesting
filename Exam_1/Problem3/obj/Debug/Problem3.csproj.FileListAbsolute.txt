@@ -1,8 +1,0 @@
-C:\Users\stax\source\repos\Exam\Problem3\bin\Debug\Problem3.exe.config
-C:\Users\stax\source\repos\Exam\Problem3\bin\Debug\Problem3.exe
-C:\Users\stax\source\repos\Exam\Problem3\bin\Debug\Problem3.pdb
-C:\Users\stax\source\repos\Exam\Problem3\obj\Debug\Problem3.csproj.AssemblyReference.cache
-C:\Users\stax\source\repos\Exam\Problem3\obj\Debug\Problem3.csproj.SuggestedBindingRedirects.cache
-C:\Users\stax\source\repos\Exam\Problem3\obj\Debug\Problem3.csproj.CoreCompileInputs.cache
-C:\Users\stax\source\repos\Exam\Problem3\obj\Debug\Problem3.exe
-C:\Users\stax\source\repos\Exam\Problem3\obj\Debug\Problem3.pdb
