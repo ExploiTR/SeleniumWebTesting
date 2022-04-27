@@ -16,12 +16,18 @@ namespace Interaction
         public void start(bool continue_)
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://demoqa.com/selectable");
 
             testNormalList();
             testGridList();
 
             driver.Quit();
+
+            if (continue_)
+            {
+                new Resizable().start(continue_);
+            }
         }
 
         private void testGridList()
@@ -48,6 +54,22 @@ namespace Interaction
                 .Click()
                 .MoveToElement(item1[1])
                 .Click()
+                .MoveToElement(item1[0])
+                .Click()
+                .MoveToElement(item1[3])
+                .Click()
+                .MoveToElement(item1[4])
+                .Click()
+                .MoveToElement(item1[5])
+                .Click()
+                .MoveToElement(item1[8])
+                .Click()
+                .MoveToElement(item1[6])
+                .Click()
+                .MoveToElement(item1[2])
+                .Click()
+                .MoveToElement(item1[1])
+                .Click()
                 .Release()
                 .Build()
                 .Perform();
@@ -59,6 +81,14 @@ namespace Interaction
 
             Actions actions = new Actions(driver);
             actions.MoveToElement(item1[0])
+                .Click()
+                .MoveToElement(item1[1])
+                .Click()
+                .MoveToElement(item1[2])
+                .Click()
+                .MoveToElement(item1[3])
+                .Click()
+                .MoveToElement(item1[0])
                 .Click()
                 .MoveToElement(item1[1])
                 .Click()

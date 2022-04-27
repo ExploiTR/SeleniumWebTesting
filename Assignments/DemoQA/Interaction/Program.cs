@@ -10,11 +10,13 @@ namespace Interaction
     {
         static void Main(string[] args)
         {
-            bool chain = false;
-          //  new Sortable().start(chain);
-            new Selectable().start(chain);
+            bool chain = true;
+            new Sortable().start(chain);
+            //new Selectable().start(chain);
+            //new Resizable().start(chain);
+            //new Droppable().start(chain);
+           //new Draggable().start(chain);
 
-            Console.ReadKey();
         }
     }
 }

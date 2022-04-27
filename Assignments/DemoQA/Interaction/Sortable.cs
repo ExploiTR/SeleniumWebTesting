@@ -16,12 +16,17 @@ namespace Interaction
         public void start(bool continue_)
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://demoqa.com/sortable");
 
             testNormalList();
             testGridList();
 
             driver.Quit();
+
+            if (continue_) {
+                new Selectable().start(continue_);
+            }
         }
 
         private void testGridList()
