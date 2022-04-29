@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Assignments",
+    "\\Assignments\\DemoQA",
+    "\\Samples"
   ],
-  "SelectedNode": "\\BookStore.sln",
+  "SelectedNode": "\\Assignments\\DemoQA\\Widgets",
   "PreviewInSolutionExplorer": false
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SeleniumBase
@@ -22,7 +23,7 @@ namespace SeleniumBase
         {
             if (driver == null)
                 driver = new ChromeDriver();
-            else { 
+            else {
                 lastInstance = driver;
                 driver = new ChromeDriver();
             }
@@ -52,11 +53,15 @@ namespace SeleniumBase
                 lastInstance.Close();
         }
 
-        protected void exit() { 
-            if(driver != null)
+        protected void exit() {
+            if (driver != null)
                 driver.Quit();
-            if(lastInstance !=null)
+            if (lastInstance != null)
                 lastInstance.Quit();
+        }
+
+        protected void wait(int time) {
+            Thread.Sleep(time);
         }
 
         protected void open(string link, LinkOptions options)
@@ -73,34 +78,34 @@ namespace SeleniumBase
             driver.Navigate().GoToUrl(link);
         }
 
-        protected IWebElement findElementID(string id) {
+        protected IWebElement findID(string id) {
             return driver.FindElement(By.Id(id));
         }
-        protected IWebElement findElementXPath(string xpath)
+        protected IWebElement findXPath(string xpath)
         {
             return driver.FindElement(By.XPath(xpath));
         }
-        protected IWebElement findElementName(string name)
+        protected IWebElement findName(string name)
         {
             return driver.FindElement(By.Name(name));
         }
-        protected IWebElement findElementCSS(string css)
+        protected IWebElement findCSS(string css)
         {
             return driver.FindElement(By.CssSelector(css));
         }
-        protected IWebElement findElementTag(string id)
+        protected IWebElement findTag(string id)
         {
             return driver.FindElement(By.TagName(id));
         }
-        protected IWebElement findElementClass(string class_)
+        protected IWebElement findClass(string class_)
         {
             return driver.FindElement(By.ClassName(class_));
         }
-        protected IWebElement findElementLinkText(string tlink)
+        protected IWebElement findLinkText(string tlink)
         {
             return driver.FindElement(By.LinkText(tlink));
         }
-        protected IWebElement findElementPartialLinkText(string plt)
+        protected IWebElement findPartialLinkText(string plt)
         {
             return driver.FindElement(By.PartialLinkText(plt));
         }
@@ -124,6 +129,15 @@ namespace SeleniumBase
         protected void sendKeys(IWebElement by, string key)
         {
             by.SendKeys(key);
+        }
+
+        protected void switchToActive(){
+            driver.SwitchTo().ActiveElement();
+        }
+
+        protected void switchToDefault()
+        {
+            driver.SwitchTo().DefaultContent();
         }
 
         protected bool textEquals(By by, string verification)

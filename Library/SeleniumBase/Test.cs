@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenQA.Selenium;
 
 namespace SeleniumBase
 {
@@ -18,9 +15,17 @@ namespace SeleniumBase
             var linkOpt = new LinkOptions();
             linkOpt.Maximize = true;
             linkOpt.FullScreen = false;
+
             open("https://www.google.com",linkOpt);
-            sendKeys(findElementXPath("//input[@title='Search']"),"mango");
-            click(findElementXPath("//input[@value='Google Search']"));
+
+            sendKeys(findXPath("//input[@title='Search']"),"mango");
+
+            switchToActive();
+
+            sendKeys(findXPath("//input[@title='Search']"), Keys.Enter);
+
+            wait(2000);
+            exit();
         }
     }
 }
