@@ -7,22 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Interaction
 {
-    internal class Sortable
+    internal class Sortable : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool continue_)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://demoqa.com/sortable");
+            open("https://demoqa.com/sortable");
 
             testNormalList();
             testGridList();
 
-            driver.Quit();
+            exit();
 
             if (continue_) {
                 new Selectable().start(continue_);
@@ -31,13 +29,12 @@ namespace Interaction
 
         private void testGridList()
         {
-            driver.FindElement(By.Id("demo-tab-grid")).Click();
-            Thread.Sleep(500);
+            FindID("demo-tab-grid").Click();
+            wait(500);
 
-            var item1 = driver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//div[contains(@class,'list-group-item')]"));
-            Actions actions = new Actions(driver);
+            var item1 = FindAllBy(By.XPath("//div[@id='demo-tabpane-grid']//div[contains(@class,'list-group-item')]"));
 
-            actions.MoveToElement(item1[0])
+            getAction().MoveToElement(item1[0])
                 .ClickAndHold()
                 .MoveToElement(item1[3])
                 .MoveToElement(item1[4])
@@ -53,10 +50,9 @@ namespace Interaction
 
         private void testNormalList()
         {
-            var item1 = driver.FindElements(By.XPath("//div[@id='demo-tabpane-list']//div[contains(@class,'list-group-item')]"));
+            var item1 = FindAllBy(By.XPath("//div[@id='demo-tabpane-list']//div[contains(@class,'list-group-item')]"));
 
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(item1[1])
+            getAction().MoveToElement(item1[1])
                 .ClickAndHold()
                 .MoveToElement(item1[3])
                 .Release()

@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using SeleniumBase;
 
 namespace Widgets
 {
-    internal class DatePickerInput
+    internal class DatePickerInput : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/date-picker");
+            open("https://demoqa.com/date-picker");
 
             activateDateCalender();
 
@@ -33,7 +30,7 @@ namespace Widgets
             checkTimeManual();
             checkTimeAuto();
 
-            driver.Quit();
+            exit();
 
             if (chain)
             {
@@ -43,19 +40,17 @@ namespace Widgets
 
         private void checkTimeAuto()
         {
-            IWebElement x = driver.FindElement(By.XPath("//input[@id='dateAndTimePickerInput']"));
-            x.Click();
-            Thread.Sleep(500);
-            driver.SwitchTo().ActiveElement();
-            driver.FindElement(By.XPath("//li[text()='22:45']")).Click();
-            Thread.Sleep(1000);
+            FindXPath("//input[@id='dateAndTimePickerInput']").Click();
+            wait(500);
+            switchToActive();
+            FindXPath("//li[text()='22:45']").Click();
+            wait(1000);
         }
 
         private void checkTimeManual()
         {
-            IWebElement x = driver.FindElement(By.XPath("//input[@id='dateAndTimePickerInput']"));
-            Actions action = new Actions(driver);
-            action.KeyDown(Keys.Control)
+            IWebElement x = FindXPath("//input[@id='dateAndTimePickerInput']");
+            getAction().KeyDown(Keys.Control)
                 .SendKeys("a")
                 .KeyUp(Keys.Control)
                 .KeyDown(Keys.Delete)
@@ -66,50 +61,47 @@ namespace Widgets
 
         private void activateDateTimeCalender()
         {
-            driver.FindElement(By.Id("dateAndTimePickerInput")).Click();
-            Thread.Sleep(500);
-            driver.SwitchTo().ActiveElement();
+            FindID("dateAndTimePickerInput").Click();
+            wait(500);
+            switchToActive();
         }
 
         private void checkDateSelect()
         {
-            driver.FindElement(By.XPath("//div[text()='22']")).Click();
-            driver.SwitchTo().DefaultContent();
+            FindXPath("//div[text()='22']").Click();
+            switchToDefault();
         }
 
         private void checkYearDropDown()
         {
-            IWebElement year_sel = driver.FindElement(By.XPath("//select[@class='react-datepicker__year-select']"));
+            IWebElement year_sel = FindXPath("//select[@class='react-datepicker__year-select']");
             year_sel.Click();
-            year_sel.FindElement(By.XPath("//option[@value='2022']")).Click();
+            FindWithInElement(By.XPath("//option[@value='2022']"), year_sel).Click();
         }
 
         private void checkMonthDropDown()
         {
-            IWebElement mon_sel = driver.FindElement(By.XPath("//select[@class='react-datepicker__month-select']"));
+            IWebElement mon_sel = FindXPath("//select[@class='react-datepicker__month-select']");
             mon_sel.Click();
             mon_sel.FindElement(By.XPath("//option[@value='5']")).Click();
         }
 
         private void checkNextMonthArrow()
         {
-            IWebElement next_mon_arrow = driver.FindElement(By.XPath("//button[text()='Next Month']"));
-            next_mon_arrow.Click();
-            Thread.Sleep(500);
+            FindXPath("//button[text()='Next Month']").Click();
+            wait(500);
         }
 
         private void checkPrevMonthArrow()
         {
-            IWebElement prev_mon_arrow = driver.FindElement(By.XPath("//button[text()='Previous Month']"));
-            prev_mon_arrow.Click();
-            Thread.Sleep(500);
+            FindXPath("//button[text()='Previous Month']").Click();
+            wait(500);
         }
 
         private void checkManualTextDateInput()
         {
-            IWebElement x = driver.FindElement(By.XPath("//input[@id='datePickerMonthYearInput']"));
-            Actions action = new Actions(driver);
-            action.KeyDown(Keys.Control)
+            IWebElement x = FindXPath("//input[@id='datePickerMonthYearInput']");
+            getAction().KeyDown(Keys.Control)
                 .SendKeys("a")
                 .KeyUp(Keys.Control)
                 .KeyDown(Keys.Delete)
@@ -120,9 +112,9 @@ namespace Widgets
 
         private void activateDateCalender()
         {
-            driver.FindElement(By.Id("datePickerMonthYearInput")).Click();
-            Thread.Sleep(500);
-            driver.SwitchTo().ActiveElement();
+            FindID("datePickerMonthYearInput").Click();
+            wait(500);
+            switchToActive();
         }
     }
 }

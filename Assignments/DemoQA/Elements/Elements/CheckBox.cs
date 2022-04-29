@@ -1,87 +1,86 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Elements
 {
-    internal class CheckBox
+    internal class CheckBox : SelActions
     {
         public void run(bool _continue)
         {
 
-            IWebDriver driver = new ChromeDriver();
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+            open("https://demoqa.com/checkbox");
 
-            try
-            {
+            wait(500);
+            click(FindXPath("//button[@title='Expand all']"));//expand root
+            wait(500);
+            click(FindXPath("//button[@title='Collapse all']")); //collapse root
 
-                driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl("https://demoqa.com/checkbox");
+            wait(500);
+            toggleHome();
+            wait(500);
+            toggleDesktop();
+            wait(500);
+            toggleNotes();
+            wait(500);
+            toggleDocuments();
+            wait(500);
+            toggleWorkSpace();
+            wait(500);
+            toggleAngularTab();
+            wait(500);
+            toggleAngularTab();
+            wait(500);
+            toggleWorkSpace();
+            wait(500);
+            toggleDocuments();
+            wait(500);
+            toggleDesktop();
+            wait(500);
+            toggleHome();
 
-                Thread.Sleep(500);
-
-                driver.FindElement(By.XPath("//button[@title='Expand all']")).Click(); //expand root
-
-                Thread.Sleep(500);
-
-                driver.FindElement(By.XPath("//button[@title='Collapse all']")).Click(); //collapse root
-
-                Thread.Sleep(500);
-
-                driver.FindElement(By.XPath("//span[text()='Home']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[0].Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Desktop']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[1].Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Notes']")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Documents']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[2].Click();
-                Thread.Sleep(2500);
-                driver.FindElement(By.XPath("//span[text()='WorkSpace']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[3].Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Angular']")).Click();
-
-                Thread.Sleep(2000);
-
-                driver.FindElement(By.XPath("//span[text()='Angular']")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='WorkSpace']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[3].Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Documents']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[2].Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Notes']")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Desktop']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[1].Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.XPath("//span[text()='Home']")).Click();
-                driver.FindElements(By.XPath("//button[@title='Toggle']"))[0].Click();
-
-                Console.WriteLine("Checks Successful!");
-
-                Thread.Sleep(3000);
-
-                driver.Quit();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Thread.Sleep(5000);
-                driver.Quit();
-            }
+            wait(2000);
+            exit();
 
             if (_continue)
                 new RadioButton().run(_continue);
         }
+
+        private void toggleHome()
+        {
+            click(FindXPath("//span[text()='Home']"));
+            click(FindAllBy(By.XPath("//button[@title='Toggle']"))[0]);
+        }
+
+        private void toggleNotes()
+        {
+            click(FindXPath("//span[text()='Notes']"));
+        }
+
+        private void toggleDocuments()
+        {
+            click(FindXPath("//span[text()='Documents']"));
+            click(FindAllBy(By.XPath("//button[@title='Toggle']"))[2]);
+        }
+
+        private void toggleDesktop()
+        {
+            click(FindXPath("//span[text()='Desktop']"));
+            click(FindAllBy(By.XPath("//button[@title='Toggle']"))[1]);
+        }
+
+        private void toggleAngularTab()
+        {
+            click(FindXPath("//span[text()='Angular']"));
+        }
+
+        private void toggleWorkSpace()
+        {
+            click(FindXPath("//span[text()='WorkSpace']"));
+            click(FindAllBy(By.XPath("//button[@title='Toggle']"))[3]);
+        }
     }
 }
+

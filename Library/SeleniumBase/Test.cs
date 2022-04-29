@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace SeleniumBase
 {
@@ -12,19 +13,18 @@ namespace SeleniumBase
 
         private void start()
         {
-            var linkOpt = new LinkOptions();
-            linkOpt.Maximize = true;
-            linkOpt.FullScreen = false;
 
-            open("https://www.google.com",linkOpt);
+            open("https://www.google.com");
 
-            sendKeys(findXPath("//input[@title='Search']"),"mango");
+            sendKeys(FindXPath("//input[@title='Search']"), "mango");
+
+            wait(1000);
 
             switchToActive();
 
-            sendKeys(findXPath("//input[@title='Search']"), Keys.Enter);
+            click(FindXPath("//input[@name='btnK']"));
 
-            wait(2000);
+            wait(5000);
             exit();
         }
     }

@@ -8,25 +8,23 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 
 namespace Interaction
 {
-    internal class Droppable
+    internal class Droppable : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool continue_)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://demoqa.com/droppable");
+            open("https://demoqa.com/droppable");
 
             testSimpleDragAndDrop();
             testAcceptRejectDroppable();
             testPropagation();
             testRevertDraggable();
 
-            driver.Quit();
+            exit();
 
             if (continue_)
             {
@@ -43,20 +41,20 @@ namespace Interaction
 
         private void testReversibleDraggable()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("revertable")))
+            new Actions(getDriver()).MoveToElement(FindID("revertable"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.XPath("//div[@class='revertable-drop-container']//div[@id='droppable']")))
+                .MoveToElement(FindXPath("//div[@class='revertable-drop-container']//div[@id='droppable']"))
                 .Release()
                 .Build()
                 .Perform();
-            Thread.Sleep(1000);
+            wait(1000);
         }
 
         private void testNonReversibleDraggable()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("notRevertable")))
+            new Actions(getDriver()).MoveToElement(FindID("notRevertable"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.XPath("//div[@class='revertable-drop-container']//div[@id='droppable']")))
+                .MoveToElement(FindXPath("//div[@class='revertable-drop-container']//div[@id='droppable']"))
                 .Release()
                 .Build()
                 .Perform();
@@ -64,7 +62,7 @@ namespace Interaction
 
         private void switchToRevertDraggable()
         {
-            driver.FindElement(By.Id("droppableExample-tab-revertable")).Click();
+            click(FindID("droppableExample-tab-revertable"));
             Thread.Sleep(500);
         }
 
@@ -77,9 +75,9 @@ namespace Interaction
 
         private void testNotGreedyPropagators()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("dragBox")))
+            new Actions(getDriver()).MoveToElement(FindID("dragBox"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.Id("notGreedyInnerDropBox")))
+                .MoveToElement(FindID("notGreedyInnerDropBox"))
                 .Release()
                 .Build()
                 .Perform();
@@ -87,12 +85,12 @@ namespace Interaction
 
         private void testGreedyPropagators()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("dragBox")))
+            new Actions(getDriver()).MoveToElement(FindID("dragBox"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.Id("greedyDropBox")))
+                .MoveToElement(FindID("greedyDropBox"))
                 .Release()
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.Id("greedyDropBoxInner")))
+                .MoveToElement(FindID("greedyDropBoxInner"))
                 .Release()
                 .Build()
                 .Perform();
@@ -100,8 +98,8 @@ namespace Interaction
 
         private void switchToPropagationTab()
         {
-            driver.FindElement(By.Id("droppableExample-tab-preventPropogation")).Click();
-            Thread.Sleep(500);
+            click(FindID("droppableExample-tab-preventPropogation"));
+            wait(500);
         }
 
         private void testAcceptRejectDroppable()
@@ -113,9 +111,9 @@ namespace Interaction
 
         private void testRejectDroppable()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//div[@id='acceptDropContainer']//div[@id='notAcceptable']")))
+            new Actions(getDriver()).MoveToElement(FindXPath("//div[@id='acceptDropContainer']//div[@id='notAcceptable']"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.XPath("//div[@id='acceptDropContainer']//div[@id='droppable']")))
+                .MoveToElement(FindXPath("//div[@id='acceptDropContainer']//div[@id='droppable']"))
                 .Release()
                 .Build()
                 .Perform();
@@ -123,9 +121,9 @@ namespace Interaction
 
         private void testAcceptDroppable()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("acceptable")))
+            new Actions(getDriver()).MoveToElement(FindID("acceptable"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.XPath("//div[@id='acceptDropContainer']//div[@id='droppable']")))
+                .MoveToElement(FindXPath("//div[@id='acceptDropContainer']//div[@id='droppable']"))
                 .Release()
                 .Build()
                 .Perform();
@@ -133,15 +131,15 @@ namespace Interaction
 
         private void switchToARD()
         {
-            driver.FindElement(By.Id("droppableExample-tab-accept")).Click();
-            Thread.Sleep(500);
+            click(FindID("droppableExample-tab-accept"));
+            wait(500);
         }
 
         private void testSimpleDragAndDrop()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//div[@id='simpleDropContainer']//div[@id='draggable']")))
+            new Actions(getDriver()).MoveToElement(FindXPath("//div[@id='simpleDropContainer']//div[@id='draggable']"))
                 .ClickAndHold()
-                .MoveToElement(driver.FindElement(By.XPath("//div[@id='simpleDropContainer']//div[@id='droppable']")))
+                .MoveToElement(FindXPath("//div[@id='simpleDropContainer']//div[@id='droppable']"))
                 .Release()
                 .Build()
                 .Perform();

@@ -6,23 +6,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SeleniumBase;
 
 namespace Widgets
 {
-    internal class AutoComplete
+    internal class AutoComplete : SelActions
     {
-        private static IWebDriver driver;
+
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/auto-complete");
+            open("https://demoqa.com/auto-complete");
 
             testMultiColorName();
             testSingleColorName();
 
-            driver.Quit();
+            exit();
 
             if (chain)
             {
@@ -32,25 +30,25 @@ namespace Widgets
 
         private void testSingleColorName()
         {
-            var mu_in = driver.FindElement(By.Id("autoCompleteSingleInput"));
+            var mu_in = FindID("autoCompleteSingleInput");
 
             mu_in.SendKeys("Gree");
-            Thread.Sleep(1000);
+            wait(1000);
             mu_in.SendKeys(Keys.Enter);
         }
 
         private void testMultiColorName()
         {
-            var mu_in = driver.FindElement(By.Id("autoCompleteMultipleInput"));
+            var mu_in = FindID("autoCompleteMultipleInput");
 
             mu_in.SendKeys("Gree");
-            Thread.Sleep(1000);
+            wait(1000);
             mu_in.SendKeys(Keys.Enter);
 
             mu_in.SendKeys("Bl");
-            Thread.Sleep(500);
+            wait(500);
             mu_in.SendKeys(Keys.ArrowDown);
-            Thread.Sleep(1000);
+            wait(1000);
             mu_in.SendKeys(Keys.Enter);
         }
     }

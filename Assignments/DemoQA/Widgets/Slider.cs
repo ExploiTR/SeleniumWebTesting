@@ -7,22 +7,19 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using SeleniumBase;
 
 namespace Widgets
 {
-    internal class Slider
+    internal class Slider : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/slider");
+            open("https://demoqa.com/slider");
 
             testSliderDrag();
 
-            driver.Quit();
+            exit();
 
             if (chain)
             {
@@ -32,11 +29,7 @@ namespace Widgets
 
         private void testSliderDrag()
         {
-            var slider = driver.FindElement(By.XPath("//input[@type='range']"));
-
-            Actions actions = new Actions(driver);
-
-            actions.MoveToElement(slider)
+            getAction().MoveToElement(FindXPath("//input[@type='range']"))
                 .ClickAndHold()
                 .MoveByOffset(10, 0)
                 .MoveByOffset(-20, 0)

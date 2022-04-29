@@ -1,31 +1,21 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using SeleniumBase;
 
 
 namespace Interaction
 {
-    internal class Draggable
+    internal class Draggable : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool continue_)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://demoqa.com/dragabble");
+            open("https://demoqa.com/dragabble");
 
             testSimpleDrag();
             testAxisRestrictedDrag();
             testContainerRestrictedDrag();
             testCursorStyles();
 
-            driver.Quit();
+            exit();
         }
 
         private void testCursorStyles()
@@ -38,8 +28,8 @@ namespace Interaction
 
         private void checkBottomCursor()
         {
-            new Actions(driver)
-                .MoveToElement(driver.FindElement(By.Id("cursorBottom")))
+            getAction()
+                .MoveToElement(FindID("cursorBottom"))
                 .ClickAndHold()
                 .MoveByOffset(200, -200)
                 .Release()
@@ -51,8 +41,8 @@ namespace Interaction
 
         private void checkTopLeftCursor()
         {
-            new Actions(driver)
-                .MoveToElement(driver.FindElement(By.Id("cursorTopLeft")))
+            getAction()
+                .MoveToElement(FindID("cursorTopLeft"))
                 .ClickAndHold()
                 .MoveByOffset(200, 0)
                 .Release()
@@ -64,8 +54,8 @@ namespace Interaction
 
         private void checkCenterCursor()
         {
-            new Actions(driver)
-                .MoveToElement(driver.FindElement(By.Id("cursorCenter")))
+            getAction()
+                .MoveToElement(FindID("cursorCenter"))
                 .ClickAndHold()
                 .MoveByOffset(200, 200)
                 .Release()
@@ -77,8 +67,8 @@ namespace Interaction
 
         private void switchToCursorTab()
         {
-            driver.FindElement(By.Id("draggableExample-tab-cursorStyle")).Click();
-            Thread.Sleep(500);
+            FindID("draggableExample-tab-cursorStyle").Click();
+            wait(500);
         }
 
         private void testContainerRestrictedDrag()
@@ -90,7 +80,7 @@ namespace Interaction
 
         private void testFreeDrag()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//span[contains(text(),'contained within my parent')]")))
+            getAction().MoveToElement(FindXPath("//span[contains(text(),'contained within my parent')]"))
                 .ClickAndHold()
                 .MoveByOffset(100, 100)
                 .Build()
@@ -99,7 +89,7 @@ namespace Interaction
 
         private void testContainerDrag()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//div[contains(text(),'contained within the box')]")))
+            getAction().MoveToElement(FindXPath("//div[contains(text(),'contained within the box')]"))
                 .ClickAndHold()
                 .MoveByOffset(100, 0)
                 .MoveByOffset(0, 500)
@@ -109,8 +99,8 @@ namespace Interaction
 
         private void switchToCRTab()
         {
-            driver.FindElement(By.Id("draggableExample-tab-containerRestriction")).Click();
-            Thread.Sleep(500);
+            FindID("draggableExample-tab-containerRestriction").Click();
+            wait(500);
         }
 
         private void testAxisRestrictedDrag()
@@ -122,31 +112,33 @@ namespace Interaction
 
         private void testRestrictedY()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("restrictedY")))
+         /*   getAction().MoveToElement(FindID("restrictedY"))
                 .ClickAndHold()
                 .MoveByOffset(50, 0)
-                .MoveByOffset(0, 50).Build().Perform();
+                .MoveByOffset(0, 50).Build().Perform();*/
+            testVerticalMovement(FindID("restrictedY"), -50, 50);
         }
 
         private void testRestrictedX()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("restrictedX")))
+          /*  getAction().MoveToElement(FindID("restrictedX"))
                 .ClickAndHold()
                 .MoveByOffset(50, 0)
-                .MoveByOffset(0, 50).Build().Perform();
+                .MoveByOffset(0, 50).Build().Perform();*/
+            testHorizontalMovement(FindID("restrictedX"), -50, 50);
         }
 
         private void switchToRATab()
         {
-            driver.FindElement(By.Id("draggableExample-tab-axisRestriction")).Click();
-            Thread.Sleep(500);
-            driver.SwitchTo().ActiveElement();
-            Thread.Sleep(500);
+            FindID("draggableExample-tab-axisRestriction").Click();
+            wait(500);
+            switchToActive();
+            wait(500);
         }
 
         private void testSimpleDrag()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.Id("dragBox")))
+            getAction().MoveToElement(FindID("dragBox"))
                 .ClickAndHold()
                 .MoveByOffset(100, 100)
                 .Build()

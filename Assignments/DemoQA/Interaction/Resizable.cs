@@ -7,23 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Interaction
 {
-    internal class Resizable
+    internal class Resizable : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool continue_)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://demoqa.com/resizable");
+            open("https://demoqa.com/resizable");
 
             testRestrictedBox();
             testOpenBox();
 
-            driver.Quit();
+            exit();
 
             if (continue_)
             {
@@ -33,13 +30,11 @@ namespace Interaction
 
         private void testOpenBox()
         {
-            var rbR = driver.FindElement(By.XPath("//div[@id='resizable']//span[contains(@class,'react-resizable-handle')]"));
-            Actions actions = new Actions(driver);
+            var rbR = FindXPath("//div[@id='resizable']//span[contains(@class,'react-resizable-handle')]");
 
-            IJavaScriptExecutor jse = (IJavaScriptExecutor)driver;
-            jse.ExecuteScript("window.scrollBy(0,600)");
+            scrollPage(0, 600);
 
-            actions.MoveToElement(rbR)
+            getAction().MoveToElement(rbR)
                 .ClickAndHold()
                 .MoveByOffset(200, 200)
                 .MoveByOffset(-200, -200)
@@ -52,12 +47,11 @@ namespace Interaction
 
         private void testRestrictedBox()
         {
-            var rbR = driver.FindElement(By.XPath("//div[@id='resizableBoxWithRestriction']//span[contains(@class,'react-resizable-handle')]"));
-            Actions actions = new Actions(driver);
+            var rbR = FindXPath("//div[@id='resizableBoxWithRestriction']//span[contains(@class,'react-resizable-handle')]");
 
-            actions.MoveToElement(rbR)
+            getAction().MoveToElement(rbR)
                 .ClickAndHold()
-                .MoveByOffset(300,300)
+                .MoveByOffset(300, 300)
                 .MoveByOffset(-450, -450)
                 .MoveByOffset(100, 200)
                 .MoveByOffset(200, 100)

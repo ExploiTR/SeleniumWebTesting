@@ -7,39 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Elements
 {
-    internal class Buttons
+    internal class Buttons : SelActions
     {
-        public void run(bool _continue) {
+        public void run(bool _continue)
+        {
+            open("https://demoqa.com/buttons");
 
-            IWebDriver driver = new ChromeDriver();
-            var executor = (IJavaScriptExecutor)driver;
+            doubleClick(FindID("doubleClickBtn"));
+            contextClick(FindID("rightClickBtn"));
+            click(FindXPath("//button[text()='Click Me']"));
 
-            try
-            {
-                driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl("https://demoqa.com/buttons");
+            wait(3000);
 
-                Actions actions = new Actions(driver);
-
-                actions.DoubleClick(driver.FindElement(By.Id("doubleClickBtn"))).Perform();
-                actions.ContextClick(driver.FindElement(By.Id("rightClickBtn"))).Perform();
-                driver.FindElement(By.XPath("//button[text()='Click Me']")).Click();
-
-                Console.WriteLine("Checks Successful!");
-
-                Thread.Sleep(3000);
-
-                driver.Quit();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Thread.Sleep(5000);
-                driver.Quit();
-            }
+            exit();
 
             if (_continue)
                 new Links().run(_continue);

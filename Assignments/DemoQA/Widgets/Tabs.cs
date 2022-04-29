@@ -7,25 +7,22 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using SeleniumBase;  
 
 namespace Widgets
 {
-    internal class Tabs
+    internal class Tabs : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
 
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/tabs");
+            open("https://demoqa.com/tabs");
 
             checkSecondTab();
             checkThirdTab();
             checkFirstTab();
 
-            driver.Quit();
+            exit();
 
             if (chain)
             {
@@ -35,20 +32,20 @@ namespace Widgets
 
         private void checkThirdTab()
         {
-            driver.FindElement(By.Id("demo-tab-use")).Click();
-            Thread.Sleep(1000);
+            FindID("demo-tab-use").Click();
+            wait(1000);
         }
 
         private void checkSecondTab()
         {
-            driver.FindElement(By.Id("demo-tab-origin")).Click();
-            Thread.Sleep(1000);
+            FindID("demo-tab-origin").Click();
+            wait(1000);
         }
 
         private void checkFirstTab()
         {
-            driver.FindElement(By.Id("demo-tab-what")).Click();
-            Thread.Sleep(1000);
+            FindID("demo-tab-what").Click();
+            wait(1000);
         }
     }
 }

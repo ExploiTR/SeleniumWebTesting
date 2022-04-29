@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore", "BookStore.csproj", "{4A9AE5AC-6D23-4E44-BEE7-D602E12360CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumBase", "..\..\..\Library\SeleniumBase\SeleniumBase.csproj", "{C890034D-6D32-46CD-B32A-497518BFD9ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4A9AE5AC-6D23-4E44-BEE7-D602E12360CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A9AE5AC-6D23-4E44-BEE7-D602E12360CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A9AE5AC-6D23-4E44-BEE7-D602E12360CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

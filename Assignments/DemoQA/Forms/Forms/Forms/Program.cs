@@ -3,18 +3,20 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Threading;
+using SeleniumBase;
 
 namespace Forms
 {
-    internal class Program
+    internal class Program : SelActions
     {
-        private static IWebDriver driver;
         static void Main(string[] args)
         {
-            driver = new ChromeDriver();
+            new Program().run();
+        }
 
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://demoqa.com/automation-practice-form");
+        private void run()
+        {
+            open("https://demoqa.com/automation-practice-form");
 
             setName("Pratim");
             setLastName("Majumder");
@@ -33,112 +35,114 @@ namespace Forms
             setCity("Delhi");
 
             submitForm();
+
+            wait(2000);
             closeModal();
 
-            Console.ReadKey();
+            wait(1000);
+            exit();
         }
 
-        private static void closeModal()
+        private void closeModal()
         {
-            Thread.Sleep(1000);
-            driver.SwitchTo().ActiveElement();
-
-            driver.FindElement(By.XPath("//button[@id='closeLargeModal']")).Click();
+            wait(1000);
+            switchToActive();
+            click(FindXPath("//button[@id='closeLargeModal']"));
         }
 
-        private static void submitForm()
+        private void submitForm()
         {
-            driver.FindElement(By.XPath("//button[@id='submit']")).Click();
+            click(FindXPath("//button[@id='submit']"));
         }
 
-        private static void setCity(string v)
+        private void setCity(string v)
         {
-            driver.FindElement(By.XPath("//div[@id='city']")).Click();
-            var x = driver.FindElement(By.XPath("//input[@id='react-select-4-input']"));
+            click(FindXPath("//div[@id='city']"));
+            var x = FindXPath("//input[@id='react-select-4-input']");
             x.SendKeys(v);
             x.SendKeys(Keys.Enter);
         }
 
-        private static void setState(string v)
+        private void setState(string v)
         {
-            driver.FindElement(By.XPath("//div[@id='state']")).Click();
-            var x = driver.FindElement(By.XPath("//input[@id='react-select-3-input']"));
+            click(FindXPath("//div[@id='state']"));
+            var x = FindXPath("//input[@id='react-select-3-input']");
             x.SendKeys(v);
             x.SendKeys(Keys.Enter);
         }
 
-        private static void setAddress(string v)
+        private void setAddress(string v)
         {
-            driver.FindElement(By.XPath("//textarea[@id='currentAddress']")).SendKeys(v);
+            sendKeys(FindXPath("//textarea[@id='currentAddress']"), v);
         }
 
-        private static void uploadPic()
+        private void uploadPic()
         {
-            driver.FindElement(By.XPath("//input[@id='uploadPicture']")).SendKeys("C:\\Users\\ExploiTR\\Desktop\\download.png");
+            sendKeys(FindXPath("//input[@id='uploadPicture']"), "C:\\Users\\ExploiTR\\Desktop\\download.png");
         }
 
-        private static void setHobbies()
+        private void setHobbies()
         {
-            driver.FindElement(By.XPath("//label[@for='hobbies-checkbox-2']")).Click();
+            click(FindXPath("//label[@for='hobbies-checkbox-2']"));
         }
 
-        private static void setSubject(string v)
+        private void setSubject(string v)
         {
-            var x = driver.FindElement(By.XPath("//input[@id='subjectsInput']"));
+            var x = FindXPath("//input[@id='subjectsInput']");
             x.SendKeys(v);
             x.SendKeys(Keys.Enter);
         }
 
-        private static void checkDate()
+        private void checkDate()
         {
-            driver.FindElement(By.XPath("//input[@id='dateOfBirthInput']")).Click();
+            click(FindXPath("//input[@id='dateOfBirthInput']"));
 
-            Thread.Sleep(500);
+            wait(500);
 
             checkDateManual("25 Jun 2030");
 
-            Thread.Sleep(1000);
+            wait(1000);
 
             checkDateInternal();
         }
 
-        private static void checkDateInternal()
+        private void checkDateInternal()
         {
-            driver.SwitchTo().ActiveElement();
+            switchToActive();
 
-            IWebElement next_mon_arrow = driver.FindElement(By.XPath("//button[text()='Next Month']"));
-            IWebElement prev_mon_arrow = driver.FindElement(By.XPath("//button[text()='Previous Month']"));
+            IWebElement next_mon_arrow = FindXPath("//button[text()='Next Month']");
+            IWebElement prev_mon_arrow = FindXPath("//button[text()='Previous Month']");
 
             prev_mon_arrow.Click();
             Thread.Sleep(500);
             next_mon_arrow.Click();
             Thread.Sleep(500);
 
-            IWebElement mon_sel = driver.FindElement(By.XPath("//select[@class='react-datepicker__month-select']"));
-            IWebElement year_sel = driver.FindElement(By.XPath("//select[@class='react-datepicker__year-select']"));
+            IWebElement mon_sel = FindXPath("//select[@class='react-datepicker__month-select']");
+            IWebElement year_sel = FindXPath("//select[@class='react-datepicker__year-select']");
 
             mon_sel.Click();
-            mon_sel.FindElement(By.XPath("//option[@value='5']")).Click();
+            click(FindWithInElement(By.XPath("//option[@value='5']"), mon_sel));
 
             year_sel.Click();
-            year_sel.FindElement(By.XPath("//option[@value='2022']")).Click();
+            click(FindWithInElement(By.XPath("//option[@value='2022']"), year_sel));
 
-            driver.FindElement(By.XPath("//div[text()='22']")).Click();
+            click(FindXPath("//div[text()='22']"));
 
-            driver.SwitchTo().DefaultContent();
+            switchToDefault();
         }
 
         /*
          *  BUG : Clearing date makes website invisible.
          */
-        private static void checkDateManual(string v)
+        private void checkDateManual(string v)
         {
             return;
 
 #pragma warning disable CS0162
 
-            IWebElement x = driver.FindElement(By.XPath("//input[@id='dateOfBirthInput']"));
-            Actions action = new Actions(driver);
+            IWebElement x = FindXPath("//input[@id='dateOfBirthInput']");
+            Actions action = new Actions(getDriver());
             action.KeyDown(Keys.Control)
                 .SendKeys("a")
                 .KeyUp(Keys.Control)
@@ -148,29 +152,29 @@ namespace Forms
             x.SendKeys(v);
         }
 
-        private static void setPhone(string v)
+        private void setPhone(string v)
         {
-            driver.FindElement(By.XPath("//input[@id='userNumber']")).SendKeys(v);
+            sendKeys(FindXPath("//input[@id='userNumber']"), v);
         }
 
-        private static void setGender()
+        private void setGender()
         {
-            driver.FindElement(By.XPath("//label[@for='gender-radio-1']")).Click();
+            click(FindXPath("//label[@for='gender-radio-1']"));
         }
 
-        private static void setEmail(string v)
+        private void setEmail(string v)
         {
-            driver.FindElement(By.XPath("//input[@id='userEmail']")).SendKeys(v);
+            sendKeys(FindXPath("//input[@id='userEmail']"), v);
         }
 
-        private static void setLastName(string v)
+        private void setLastName(string v)
         {
-            driver.FindElement(By.XPath("//input[@id='lastName']")).SendKeys(v);
+            sendKeys(FindXPath("//input[@id='lastName']"), v);
         }
 
-        private static void setName(string v)
+        private void setName(string v)
         {
-            driver.FindElement(By.XPath("//input[@id='firstName']")).SendKeys(v);
+            sendKeys(FindXPath("//input[@id='firstName']"), v);
         }
 
 

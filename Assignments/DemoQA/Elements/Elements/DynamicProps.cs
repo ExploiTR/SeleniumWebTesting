@@ -4,49 +4,37 @@ using OpenQA.Selenium.Chrome;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.ObjectModel;
+using SeleniumBase;
 
 namespace Elements
 {
-    internal class DynamicProps
+    internal class DynamicProps : SelActions
     {
         public void run()
         {
-            IWebDriver driver = new ChromeDriver();
+            open("https://demoqa.com/dynamic-properties");
 
-            try
-            {
-                driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl("https://demoqa.com/dynamic-properties");
+            IWebElement enableAfter5 = FindID("enableAfter");
+            IWebElement coloredButton = FindID("colorChange");
+            ReadOnlyCollection<IWebElement> visibleAfter5 = FindAllBy(By.Id("visibleAfter"));
 
-                IWebElement enableAfter5 = driver.FindElement(By.Id("enableAfter"));
-                IWebElement coloredButton = driver.FindElement(By.Id("colorChange"));
-                ReadOnlyCollection<IWebElement> visibleAfter5 = driver.FindElements(By.Id("visibleAfter"));
+            string initialButtonColor = coloredButton.GetCssValue("color");
 
-                string initialButtonColor = coloredButton.GetCssValue("color");
+            Assert.IsFalse(enableAfter5.Enabled);
+            Assert.IsTrue(visibleAfter5.Count == 0);
 
-                Assert.IsFalse(enableAfter5.Enabled);
-                Assert.IsTrue(visibleAfter5.Count == 0);
+            wait(5100);
 
-                Thread.Sleep(5100);
+            ReadOnlyCollection<IWebElement> visibleAfter5_ = FindAllBy(By.Id("visibleAfter"));
 
-                ReadOnlyCollection<IWebElement> visibleAfter5_ = driver.FindElements(By.Id("visibleAfter"));
+            Assert.IsTrue(enableAfter5.Enabled);
+            Assert.IsTrue(visibleAfter5_.Count > 0);
+            Assert.AreNotEqual(initialButtonColor, coloredButton.GetCssValue("color"));
 
-                Assert.IsTrue(enableAfter5.Enabled);
-                Assert.IsTrue(visibleAfter5_.Count > 0);
-                Assert.AreNotEqual(initialButtonColor,coloredButton.GetCssValue("color"));
+            wait(3000);
 
-                Console.WriteLine("Checks Successful!");
+            exit();
 
-                Thread.Sleep(3000);
-
-                driver.Quit();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Thread.Sleep(5000);
-            }
-            driver.Quit();
         }
     }
 }

@@ -6,52 +6,32 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Elements
 {
-    internal class TextBox
+    internal class TextBox : SelActions
     {
         public void run(bool _continue)
         {
-            IWebDriver driver = new ChromeDriver();
-            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+            open("https://demoqa.com/text-box");
 
-            try
-            {
+            wait(500);
 
-                driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl("https://demoqa.com/text-box");
+            sendKeys(FindID("userName"), "Pratim Majumder");
+            sendKeys(FindID("userEmail"), "majumder@gmail.com");
+            sendKeys(FindID("currentAddress"), "India");
+            sendKeys(FindID("permanentAddress"), "WB, India");
 
-                Thread.Sleep(500);
+            scrollForElementVisibility(FindID("submit"));
 
-                driver.FindElement(By.Id("userName")).SendKeys("Pratim Majumder");
-                driver.FindElement(By.Id("userEmail")).SendKeys("majumder@gmail.com");
-                driver.FindElement(By.Id("currentAddress")).SendKeys("India");
-                driver.FindElement(By.Id("permanentAddress")).SendKeys("WB, India");
+            wait(500);
 
-                IWebElement submitButton = driver.FindElement(By.Id("submit"));
+            click(FindID("submit"));
 
-                do
-                {
-                    executor.ExecuteScript("window.scrollBy(0,1)");
-                } while (!submitButton.Displayed || !submitButton.Enabled);
+            wait(3000);
 
-                Thread.Sleep(500);
-
-                submitButton.Click();
-
-                Console.WriteLine("Checks Successful!");
-
-                Thread.Sleep(3000);
-
-                driver.Quit();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Thread.Sleep(5000);
-                driver.Quit();
-            }
+            exit();
 
             if (_continue)
                 new CheckBox().run(_continue);

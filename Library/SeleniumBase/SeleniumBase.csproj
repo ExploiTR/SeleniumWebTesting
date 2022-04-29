@@ -49,8 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DriverConfig.cs" />
+    <Compile Include="IActionComponents.cs" />
+    <Compile Include="IControlFunctions.cs" />
+    <Compile Include="IDriverComponents.cs" />
+    <Compile Include="IElementOperations.cs" />
     <Compile Include="Test.cs" />
-    <Compile Include="LinkOptions.cs" />
     <Compile Include="SelActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

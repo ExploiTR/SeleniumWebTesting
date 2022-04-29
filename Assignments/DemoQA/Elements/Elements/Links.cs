@@ -1,71 +1,45 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Elements
 {
-    internal class Links
+    internal class Links : SelActions
     {
-        public void run(bool _continue) {
-            IWebDriver driver = new ChromeDriver();
+        public void run(bool _continue)
+        {
 
-            try
+            open("https://demoqa.com/links");
+            click(FindID("simpleLink"));
+            wait(500);
+            switchToWindow(1);
+            wait(500);
+            close();
+
+            switchToWindow(0);
+            click(FindID("dynamicLink"));
+            wait(500);
+            switchToWindow(1);
+            wait(500);
+            close();
+
+            switchToWindow(0);
+
+            click(FindID("created"));
+            click(FindID("no-content"));
+            click(FindID("moved"));
+            click(FindID("bad-request"));
+            click(FindID("unauthorized"));
+            click(FindID("forbidden"));
+            click(FindID("invalid-url"));
+
+            wait(3000);
+            exit();
+
+            if (_continue)
             {
-                driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl("https://demoqa.com/links");
-
-                //driver.FindElement(By.XPath("//a[@id='simpleLink']")).Click();
-                driver.FindElement(By.Id("simpleLink")).Click();
-                Thread.Sleep(500);
-                driver.SwitchTo().Window(driver.WindowHandles[1]);
-                Thread.Sleep(500);
-                driver.Close();
-
-                driver.SwitchTo().Window(driver.WindowHandles[0]);
-
-                //driver.FindElement(By.XPath("//a[@id='dynamicLink']")).Click();
-                driver.FindElement(By.Id("dynamicLink")).Click();
-                Thread.Sleep(500);
-                driver.SwitchTo().Window(driver.WindowHandles[1]);
-                Thread.Sleep(500);
-                driver.Close();
-
-                driver.SwitchTo().Window(driver.WindowHandles[0]);
-
-                driver.FindElement(By.Id("created")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.Id("no-content")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.Id("moved")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.Id("bad-request")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.Id("unauthorized")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.Id("forbidden")).Click();
-                Thread.Sleep(500);
-                driver.FindElement(By.Id("invalid-url")).Click();
-
-                Console.WriteLine("Checks Successful!");
-
-                Thread.Sleep(3000);
-
-                driver.Quit();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Thread.Sleep(5000);
-                driver.Quit();
-            }
-
-            if (_continue) { 
                 new BrokenLink().run(_continue);
             }
         }

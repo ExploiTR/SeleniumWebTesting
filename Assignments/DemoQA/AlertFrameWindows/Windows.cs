@@ -6,25 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace AlertFrameWindows
 {
-    internal class Windows
+    internal class Windows : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
 
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/browser-windows");
+            open("https://demoqa.com/browser-windows");
 
             testNewTab();
             testNewWindow();
             testWindowMessage();
 
-            driver.Quit();
+            exit();
 
             if (chain) {
                 new Alerts().start(chain);
@@ -49,11 +46,11 @@ namespace AlertFrameWindows
 
         private void testHandleInternal(string id)
         {
-            driver.FindElement(By.Id(id)).Click();
-            Thread.Sleep(1000);
-            driver.SwitchTo().Window(driver.WindowHandles[1]);
-            driver.Close();
-            driver.SwitchTo().Window(driver.WindowHandles[0]);
+            FindID(id).Click();
+            wait(1000);
+            switchToWindow(1);
+            close();
+            switchToWindow(0);
         }
     }
 }

@@ -6,20 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace AlertFrameWindows
 {
-    internal class Frames
+    internal class Frames : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+            open("https://demoqa.com/frames");
 
-            driver.Navigate().GoToUrl("https://demoqa.com/frames");
-
-            driver.Quit();
+            exit();
 
             if (chain)
             {

@@ -6,24 +6,21 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Widgets
 {
-    internal class Accordian
+    internal class Accordian : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/accordian");
+            open("https://demoqa.com/accordian");
 
             openCloseFirst();
             openCloseSecond();
             openCloseThird();
 
-            driver.Quit();
+            exit();
 
             if (chain)
             {
@@ -48,9 +45,9 @@ namespace Widgets
 
         private void oac(string id)
         {
-            driver.FindElement(By.Id(id)).Click();
+            FindID(id).Click();
             Thread.Sleep(1000);
-            driver.FindElement(By.Id(id)).Click();
+            FindID(id).Click();
         }
     }
 }

@@ -7,23 +7,20 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using SeleniumBase;
 
 namespace Widgets
 {
-    internal class ProgressBar
+    internal class ProgressBar : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
 
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/progress-bar");
+            open("https://demoqa.com/progress-bar");
 
             checkBar();
 
-            driver.Quit();
+            exit();
 
             if (chain)
             {
@@ -33,28 +30,30 @@ namespace Widgets
 
         private void checkBar()
         {
-            var bar = driver.FindElement(By.Id("startStopButton"));
-            var readVal = driver.FindElement(By.XPath("//div[@role='progressbar']"));
+            var bar = FindID("startStopButton");
+            var readVal = FindXPath("//div[@role='progressbar']");
 
             bar.Click();
 
             while (true)
             {
-                if (readVal.Text.Equals("25%") || readVal.Text.Equals("50%") || readVal.Text.Equals("75%"))
+                if (textEquals(readVal,"25%") || textEquals(readVal, "50%") || textEquals(readVal, "75%"))
                 {
                     bar.Click();
-                    Thread.Sleep(1000);
+                    wait(1000);
                     bar.Click();
-                    Thread.Sleep(1000);
+                    wait(1000);
                 }
                 else if (readVal.Text.Equals("100%"))
                 {
-                    Thread.Sleep(1000);
+                    wait(1000);
                     break;
                 }
             }
-            driver.FindElement(By.Id("resetButton")).Click();
-            Thread.Sleep(2500);
+            FindID("resetButton").Click();
+            wait(1000);
+            FindID("startStopButton").Click();
+            wait(2500);
         }
 
     }

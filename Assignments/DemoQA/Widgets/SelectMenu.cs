@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using SeleniumBase;
 
 
 namespace Widgets
 {
-    internal class SelectMenu
+    internal class SelectMenu : SelActions
     {
-        private static IWebDriver driver;
         public void start()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            driver.Navigate().GoToUrl("https://demoqa.com/select-menu");
+            open("https://demoqa.com/select-menu");
 
             pickOption();
             pickTitle();
@@ -27,61 +24,69 @@ namespace Widgets
             pickMulColor();
             testStdMulSel();
 
-            Console.ReadKey();
-
-            driver.Quit();
+            exit();
         }
 
         private void testStdMulSel()
         {
-            var yo = driver.FindElement(By.Id("cars"));
-
-            Actions actions = new Actions(driver);
-
-            actions.KeyDown(Keys.LeftControl)
-                .MoveToElement(driver.FindElements(By.XPath("//select[@id='cars']//option"))[1])
+            getAction().KeyDown(Keys.LeftControl)
+                .MoveToElement(FindAllBy(By.XPath("//select[@id='cars']//option"))[1])
                 .Click()
-                .MoveToElement(driver.FindElements(By.XPath("//select[@id='cars']//option"))[0])
+                .MoveToElement(FindAllBy(By.XPath("//select[@id='cars']//option"))[0])
                 .Click()
-                .Release().Build().Perform();
+                .Release()
+                .Build()
+                .Perform();
+
+            wait(1000);
         }
 
         private void pickMulColor()
         {
-            var z = driver.FindElement(By.XPath("//div[text()='Select...']"));
-            z.Click();
+            FindXPath("//div[text()='Select...']").Click();
 
-            driver.FindElement(By.XPath("//input[@id='react-select-4-input']"))
-                .SendKeys(Keys.ArrowDown + Keys.Enter + Keys.ArrowDown + Keys.Enter + Keys.ArrowDown + Keys.Enter + Keys.ArrowDown + Keys.Enter);
+            FindXPath("//input[@id='react-select-4-input']")
+                .SendKeys(Keys.ArrowDown + Keys.Enter +
+                Keys.ArrowDown + Keys.Enter +
+                Keys.ArrowDown + Keys.Enter +
+                Keys.ArrowDown + Keys.Enter);
+
+            wait(1000);
         }
 
         private void pickColor()
         {
-            var f = driver.FindElement(By.Id("oldSelectMenu"));
-            f.Click();
-            f.SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.Enter);
+            getAction().Click(FindID("oldSelectMenu"))
+                .SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.Enter);
+
+            wait(1000);
         }
 
         private void pickTitle()
         {
-            driver.FindElement(By.XPath("//div[text()='Select Title']"))
+            FindXPath("//div[text()='Select Title']")
                 .Click();
 
-            Thread.Sleep(500);
+            wait(500);
 
-            driver.FindElement(By.XPath("//input[@id='react-select-3-input']"))
-                .SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter);
+            FindXPath("//input[@id='react-select-3-input']")
+                 .SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter);
+
+            wait(1000);
         }
 
         private void pickOption()
         {
-            driver.FindElement(By.XPath("//div[text()='Select Option']"))
-                .Click();
+            FindXPath("//div[text()='Select Option']").Click();
 
-            Thread.Sleep(500);
+            wait(500);
 
-            driver.FindElement(By.XPath("//input[@id='react-select-2-input']"))
-                .SendKeys(Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.ArrowDown + Keys.Enter);
+            FindXPath("//input[@id='react-select-2-input']")
+                .SendKeys(Keys.ArrowDown + Keys.ArrowDown +
+                Keys.ArrowDown + Keys.ArrowDown +
+                Keys.ArrowDown + Keys.Enter);
+
+            wait(1000);
         }
     }
 }

@@ -7,22 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace Interaction
 {
-    internal class Selectable
+    internal class Selectable : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool continue_)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://demoqa.com/selectable");
+            open("https://demoqa.com/selectable");
 
             testNormalList();
             testGridList();
 
-            driver.Quit();
+            exit();
 
             if (continue_)
             {
@@ -32,73 +30,49 @@ namespace Interaction
 
         private void testGridList()
         {
-            driver.FindElement(By.Id("demo-tab-grid")).Click();
-            Thread.Sleep(500);
+            FindID("demo-tab-grid").Click();
+            wait(500);
 
-            var item1 = driver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(@class,'list-group-item')]"));
-            Actions actions = new Actions(driver);
+            var item1 = FindAllBy(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(@class,'list-group-item')]"));
 
-            actions.MoveToElement(item1[0])
-                .Click()
-                .MoveToElement(item1[3])
-                .Click()
-                .MoveToElement(item1[4])
-                .Click()
-                .MoveToElement(item1[5])
-                .Click()
-                .MoveToElement(item1[8])
-                .Click()
-                .MoveToElement(item1[6])
-                .Click()
-                .MoveToElement(item1[2])
-                .Click()
-                .MoveToElement(item1[1])
-                .Click()
-                .MoveToElement(item1[0])
-                .Click()
-                .MoveToElement(item1[3])
-                .Click()
-                .MoveToElement(item1[4])
-                .Click()
-                .MoveToElement(item1[5])
-                .Click()
-                .MoveToElement(item1[8])
-                .Click()
-                .MoveToElement(item1[6])
-                .Click()
-                .MoveToElement(item1[2])
-                .Click()
-                .MoveToElement(item1[1])
-                .Click()
-                .Release()
-                .Build()
-                .Perform();
+            Actions actions = getAction();
+
+            moveToElementAndClick(item1[0]);
+            moveToElementAndClick(item1[1]);
+            moveToElementAndClick(item1[3]);
+            moveToElementAndClick(item1[4]);
+            moveToElementAndClick(item1[5]);
+            moveToElementAndClick(item1[8]);
+            moveToElementAndClick(item1[3]);
+            moveToElementAndClick(item1[4]);
+            moveToElementAndClick(item1[6]);
+            moveToElementAndClick(item1[2]);
+            moveToElementAndClick(item1[1]);
+            moveToElementAndClick(item1[5]);
+            moveToElementAndClick(item1[0]);
+            moveToElementAndClick(item1[7]);
+            moveToElementAndClick(item1[2]);
+            moveToElementAndClick(item1[1]);
+
+            actions.Build().Perform();
         }
 
         private void testNormalList()
         {
-            var item1 = driver.FindElements(By.XPath("//div[@id='demo-tabpane-list']//li[contains(@class,'list-group-item')]"));
+            var item1 = FindAllBy(By.XPath("//div[@id='demo-tabpane-list']//li[contains(@class,'list-group-item')]"));
 
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(item1[0])
-                .Click()
-                .MoveToElement(item1[1])
-                .Click()
-                .MoveToElement(item1[2])
-                .Click()
-                .MoveToElement(item1[3])
-                .Click()
-                .MoveToElement(item1[0])
-                .Click()
-                .MoveToElement(item1[1])
-                .Click()
-                .MoveToElement(item1[2])
-                .Click()
-                .MoveToElement(item1[3])
-                .Click()
-                .Release()
-                .Build()
-                .Perform();
+            Actions actions = getAction();
+
+            moveToElementAndClick(item1[0]);
+            moveToElementAndClick(item1[1]);
+            moveToElementAndClick(item1[2]);
+            moveToElementAndClick(item1[3]);
+            moveToElementAndClick(item1[0]);
+            moveToElementAndClick(item1[1]);
+            moveToElementAndClick(item1[2]);
+            moveToElementAndClick(item1[3]);
+
+            actions.Build().Perform();
         }
     }
 }

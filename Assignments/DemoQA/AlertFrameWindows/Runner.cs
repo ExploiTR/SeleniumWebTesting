@@ -13,10 +13,10 @@ namespace AlertFrameWindows
             bool chain = true;
 
             new Windows().start(chain);
-          /*  new Alerts().start(chain);
-            new Frames().start(chain);
-            new NestedFrames().start(chain);
-            new Modal().start(chain);*/
+            //new Alerts().start(chain);
+            //new Frames().start(chain);
+            //new NestedFrames().start(chain);
+            //new Modal().start(chain);
         }
     }
 }

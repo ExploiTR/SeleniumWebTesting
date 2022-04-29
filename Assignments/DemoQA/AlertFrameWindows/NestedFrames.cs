@@ -1,25 +1,14 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using SeleniumBase;
 
 namespace AlertFrameWindows
 {
-    internal class NestedFrames
+    internal class NestedFrames : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+            open("https://demoqa.com/nestedframes");
 
-            driver.Navigate().GoToUrl("https://demoqa.com/nestedframes");
-
-            driver.Quit();
+            exit();
 
             if (chain)
             {
