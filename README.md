@@ -4,4 +4,4 @@
 • Exams : Codes related to offline exams taken at office.  
 • Samples : Test codes, experiments
 
-[Library folder] : Codes related to testing framework.
+[Library folder] : Codes related to custom testing framework.
