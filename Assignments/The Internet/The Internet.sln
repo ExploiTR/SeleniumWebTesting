@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAY2Automation", "WAY2Automation\WAY2Automation.csproj", "{5C8F6F95-92E7-45F1-8F96-8E21C92EF07B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The Internet", "The Internet.csproj", "{8002CF15-0A2E-49F7-B0A5-274A842F720E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumBase", "..\..\Library\SeleniumBase\SeleniumBase.csproj", "{C890034D-6D32-46CD-B32A-497518BFD9ED}"
 EndProject
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C8F6F95-92E7-45F1-8F96-8E21C92EF07B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C8F6F95-92E7-45F1-8F96-8E21C92EF07B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C8F6F95-92E7-45F1-8F96-8E21C92EF07B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C8F6F95-92E7-45F1-8F96-8E21C92EF07B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8002CF15-0A2E-49F7-B0A5-274A842F720E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8002CF15-0A2E-49F7-B0A5-274A842F720E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8002CF15-0A2E-49F7-B0A5-274A842F720E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8002CF15-0A2E-49F7-B0A5-274A842F720E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C890034D-6D32-46CD-B32A-497518BFD9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BC87BC9D-7F8B-4424-81C9-1AA616C7A2DE}
+		SolutionGuid = {F983E361-CCFB-43BA-8B75-D929335571D8}
 	EndGlobalSection
 EndGlobal

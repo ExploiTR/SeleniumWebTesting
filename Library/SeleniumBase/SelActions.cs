@@ -88,6 +88,7 @@ namespace SeleniumBase
 
         public void close()
         {
+            wait(1000);
             if (driver != null)
                 driver.Close();
             if (lastInstance != null)
@@ -96,6 +97,7 @@ namespace SeleniumBase
 
         public void exit()
         {
+            wait(2000);
             if (driver != null)
                 driver.Quit();
             if (lastInstance != null)
@@ -142,7 +144,8 @@ namespace SeleniumBase
             return driver.SwitchTo().ParentFrame();
         }
 
-        public IWebDriver switchToFrame(int index) { 
+        public IWebDriver switchToFrame(int index)
+        {
             return driver.SwitchTo().Frame(index);
         }
 
@@ -167,6 +170,12 @@ namespace SeleniumBase
         {
             return driver.FindElement(By.CssSelector(css));
         }
+
+        public IWebElement FindText(string tag, string text)
+        {
+            return driver.FindElement(By.XPath("//" + tag + "[text()='" + text + "']"));
+        }
+
         public IWebElement FindTag(string id)
         {
             return driver.FindElement(By.TagName(id));
@@ -241,6 +250,11 @@ namespace SeleniumBase
             Thread.Sleep(time);
         }
 
+        public void wait_5()
+        {
+            wait(500);
+        }
+
         public void execScript(string script, params object[] args)
         {
             ((IJavaScriptExecutor)driver).ExecuteScript(script, args);
@@ -297,7 +311,6 @@ namespace SeleniumBase
         {
             getAction().MoveToElement(element)
                 .ClickAndHold()
-                .MoveByOffset(minPX, minPY)
                 .MoveByOffset(maxPX, minPY)
                 .MoveByOffset(maxPX, maxPY)
                 .MoveByOffset(minPX, maxPY)
@@ -382,6 +395,18 @@ namespace SeleniumBase
         public void clear(IWebElement element)
         {
             element.Clear();
+          /*  wait(100);
+            if (element.Text.Length > 0)
+            {
+                string key = Keys.Backspace;
+                for (int i = 0; i < element.Text.Length; i++)
+                {
+                    key += Keys.Backspace;
+                }
+                getAction().SendKeys(key);
+            }*/
+
+            //test prototype
         }
 
         public void clearAndSendKeys(IWebElement element, string key)
@@ -458,6 +483,38 @@ namespace SeleniumBase
         public void hoverOnto(IWebElement webElement)
         {
             getAction().MoveToElement(webElement).Perform();
+        }
+
+        public void wait1s()
+        {
+            wait(1000);
+        }
+
+        public void wait2s()
+        {
+            wait(2000);
+        }
+
+        public void wait3s()
+        {
+            wait(3000);
+        }
+
+        public void wait5s()
+        {
+            wait(5000);
+        }
+
+        public void clickAndThenSendKeys(IWebElement element, string combo)
+        {
+            element.Click();
+            wait_5();
+            element.SendKeys(combo);
+        }
+
+        public IWebElement FindTextTagless(string text)
+        {
+            return FindText("*", text);
         }
     }
 }

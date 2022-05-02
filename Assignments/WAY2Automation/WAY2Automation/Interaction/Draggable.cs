@@ -8,18 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SeleniumBase;
 
 namespace WAY2Automation
 {
-    internal class Draggable
+    internal class Draggable : SelActions
     {
-        private static IWebDriver driver;
         public void start(bool chain)
         {
-            driver = new ChromeDriver();
-
-            driver.Navigate().GoToUrl("https://www.way2automation.com/way2auto_jquery/draggable.php#load_box");
-            driver.Manage().Window.Maximize();
+            open("https://www.way2automation.com/way2auto_jquery/draggable.php#load_box");
 
             testDefaultMode();
             switchToContraintPage();
@@ -28,113 +25,126 @@ namespace WAY2Automation
             testCursors();
             switchToEventPage();
             testEvents();
+            switchToDrggableAndSortable();
+            testDragAndSort();
+
+            exit();
 
             if (chain)
             {
-                new Draggable().start(chain);
+                new Droppable().start(chain);
             }
+        }
 
-            Thread.Sleep(2000);
-            driver.Quit();
+        private void testDragAndSort()
+        {
+            switchToFrame(4);
+
+            IWebElement drggable = FindXPath("//li[text()='Drag me down']");
+            IWebElement sortable = FindXPath("//li[text()='Item 2']");
+            IWebElement sortableTo = FindXPath("//li[text()='Item 5']");
+
+            getAction().ClickAndHold(drggable)
+                .MoveToElement(sortable).Release().Build().Perform();
+
+            wait(1000);
+
+            getAction().ClickAndHold(sortable)
+                .MoveToElement(sortableTo).Release().Build().Perform();
+        }
+
+        private void switchToDrggableAndSortable()
+        {
+            FindXPath("//a[text()='Events']//following::li[1]").Click();
         }
 
         private void testEvents()
         {
-            driver.SwitchTo().Frame(3);
+            switchToFrame(3);
 
-            IWebElement draggable = driver.FindElement(By.XPath("//p[contains(text(),'chain of events')]"));
+            getAction().MoveToElement(FindXPath("//p[contains(text(),'chain of events')]"))
+                .ClickAndHold()
+                .MoveByOffset(50, 50)
+                .Release()
+                .ClickAndHold()
+                .MoveByOffset(50, 50)
+                .Release()
+                .ClickAndHold()
+                .MoveByOffset(20, -20)
+                .MoveByOffset(-20, 20)
+                .MoveByOffset(20, -20)
+                .MoveByOffset(-20, 20)
+                .MoveByOffset(20, -20)
+                .MoveByOffset(-20, 20)
+                .Release()
+                .Build()
+                .Perform();
 
-            foreach (int i in new int[] { 1, 2 })
-            {
-                moveSquare(draggable);
-            }
+            switchToDefault();
         }
 
         private void switchToEventPage()
         {
-            driver.FindElement(By.XPath("//a[contains(text(),'Event')]")).Click();
-            Thread.Sleep(1000);
+            FindXPath("//a[contains(text(),'Event')]").Click();
+            wait(1000);
         }
 
         private void testCursors()
         {
-            driver.SwitchTo().Frame(2);
+            switchToFrame(2);
 
+            sqMovementLocal(FindXPath("//p[contains(text(),'stick to the center')]"));
+            sqMovementLocal(FindXPath("//p[contains(text(),'-5')]"));
+            sqMovementLocal(FindXPath("//p[contains(text(),'bottom')]"));
 
-            IWebElement center_m = driver.FindElement(By.XPath("//p[contains(text(),'stick to the center')]"));
-            IWebElement corner_55 = driver.FindElement(By.XPath("//p[contains(text(),'-5')]"));
-            IWebElement bottom = driver.FindElement(By.XPath("//p[contains(text(),'bottom')]"));
-
-            /*  Actions mouseAcc = new Actions(driver);
-
-              mouseAcc.MoveToElement(center_m)
-                  .ClickAndHold()
-                  .MoveByOffset(300, 0)
-                  .MoveByOffset(0, 300)
-                  .MoveByOffset(-300, 0)
-                  .MoveByOffset(0, -300)
-                  .Release()
-                  .Build()
-                  .Perform();*/
-
-            moveSquare(center_m);
-            moveSquare(corner_55);
-            moveSquare(bottom);
-
-            driver.SwitchTo().DefaultContent();
+            switchToDefault();
         }
 
         private void switchToCursorPage()
         {
-            driver.FindElement(By.XPath("//a[contains(text(),'Cursor')]")).Click();
-            Thread.Sleep(1000);
+            FindXPath("//a[contains(text(),'Cursor')]").Click();
+            wait(1000);
         }
 
         private void switchToContraintPage()
         {
-            driver.FindElement(By.XPath("//a[contains(text(),'Constrain')]")).Click();
-            Thread.Sleep(1000);
+            FindXPath("//a[contains(text(),'Constrain')]").Click();
+            wait(1000);
         }
 
         private void testConstraints()
         {
-            driver.SwitchTo().Frame(1);
+            switchToFrame(1);
 
-            IWebElement v_cursor = driver.FindElement(By.XPath("//p[text()='I can be dragged only vertically']"));
-            IWebElement h_cursor = driver.FindElement(By.XPath("//p[text()='I can be dragged only horizontally']"));
+            IWebElement v_cursor = FindXPath("//p[text()='I can be dragged only vertically']");
+            IWebElement h_cursor = FindXPath("//p[text()='I can be dragged only horizontally']");
 
-            IWebElement cl_box = driver.FindElement(By.XPath("//p[contains(text(),'contained within the box')]"));
-            IWebElement cl_parent = driver.FindElement(By.XPath("//p[contains(text(),'contained within my parent')]"));
+            IWebElement cl_box = FindXPath("//p[contains(text(),'contained within the box')]");
+            IWebElement cl_parent = FindXPath("//p[contains(text(),'contained within my parent')]");
 
-            moveSquare(h_cursor);
-            moveSquare(v_cursor);
-            moveSquare(cl_box);
-            moveSquare(cl_parent);
+            testHorizontalMovement(h_cursor, 0, 150);
+            testVerticalMovement(v_cursor, 0, 100);
+            sqMovementLocal(cl_box);
+            sqMovementLocal(cl_parent);
 
-            driver.SwitchTo().DefaultContent();
+            switchToDefault();
         }
 
         private void testDefaultMode()
         {
-            driver.SwitchTo().Frame(0);
+            switchToFrame(0);
 
-            IWebElement cursor = driver.FindElement(By.XPath("//div[@id='draggable']"));
+            IWebElement cursor = FindXPath("//div[@id='draggable']");
 
-            moveSquare(cursor);
+            sqMovementLocal(cursor);
 
-            driver.SwitchTo().DefaultContent();
+            switchToDefault();
         }
 
-        private void moveSquare(IWebElement cursor)
+        private void sqMovementLocal(IWebElement element)
         {
-            Actions actions = new Actions(driver);
-
-            actions.DragAndDropToOffset(cursor, 150, 0)
-                .DragAndDropToOffset(cursor, 0, 150)
-                .DragAndDropToOffset(cursor, -150, 0)
-                .DragAndDropToOffset(cursor, 0, -150)
-                .Build().Perform();
-
+            squareMovement(element, -100, 100, -100, 100);
         }
+
     }
 }

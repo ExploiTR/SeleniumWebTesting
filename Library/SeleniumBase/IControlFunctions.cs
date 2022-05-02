@@ -12,6 +12,16 @@ namespace SeleniumBase
     {
         void wait(int time);
 
+        void wait_5();
+
+        void wait1s();
+
+        void wait2s();
+
+        void wait3s();
+
+        void wait5s();
+
         void recordScreen();
 
         void takeScreenShot();

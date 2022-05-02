@@ -21,6 +21,8 @@ namespace SeleniumBase
         IWebElement FindLinkText(string tlink);
         IWebElement FindPartialLinkText(string plt);
         IWebElement FindWithInElement(By by, IWebElement element);
+        IWebElement FindText(string tag,string text);
+        IWebElement FindTextTagless(string text);
 
         ReadOnlyCollection<IWebElement> FindAllBy(By by);
 
@@ -49,5 +51,7 @@ namespace SeleniumBase
         void clearAndSendKeys(By by, string key);
 
         void clear(IWebElement element);
+
+        void clickAndThenSendKeys(IWebElement element, string combo);
     }
 }
