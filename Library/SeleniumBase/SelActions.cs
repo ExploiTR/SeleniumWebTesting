@@ -8,11 +8,11 @@ using System.Threading;
 
 namespace SeleniumBase
 {
-    public class SelActions : IDriverComponents, IElementOperations, IControlFunctions, IActionComponents
+    public class SelActions : IDriverComponents, IElementOperations, IControlFunctions, IActionComponents, IConditions
     {
         private IWebDriver driver = null;
         private IWebDriver lastInstance = null;
-        private Actions instance;
+        private Actions instance = null;
         private void init()
         {
             if (driver == null)
@@ -330,9 +330,9 @@ namespace SeleniumBase
             getAction().DragAndDropToOffset(movable, offX, offY).Perform();
         }
 
-        public void sendKeysWithAction(IWebElement element, string key)
+        public void sendKeysWithAction(string key)
         {
-            getAction().SendKeys(element, key);
+            getAction().SendKeys(key).Perform();
         }
 
         public Actions getAction()
@@ -395,16 +395,16 @@ namespace SeleniumBase
         public void clear(IWebElement element)
         {
             element.Clear();
-          /*  wait(100);
-            if (element.Text.Length > 0)
-            {
-                string key = Keys.Backspace;
-                for (int i = 0; i < element.Text.Length; i++)
-                {
-                    key += Keys.Backspace;
-                }
-                getAction().SendKeys(key);
-            }*/
+            /*  wait(100);
+              if (element.Text.Length > 0)
+              {
+                  string key = Keys.Backspace;
+                  for (int i = 0; i < element.Text.Length; i++)
+                  {
+                      key += Keys.Backspace;
+                  }
+                  getAction().SendKeys(key);
+              }*/
 
             //test prototype
         }
@@ -515,6 +515,48 @@ namespace SeleniumBase
         public IWebElement FindTextTagless(string text)
         {
             return FindText("*", text);
+        }
+
+        public void controlClick(IWebElement element)
+        {
+            getAction()
+                .KeyDown(Keys.LeftControl)
+                .Click(element)
+                .KeyUp(Keys.LeftControl)
+                .Release()
+                .Build()
+                .Perform();
+        }
+
+        public IWebElement FindClassesTagLess(string className)
+        {
+            return FindXPath("//*[@class='" + className + "']");
+        }
+
+        public void hoverOntoJS(IWebElement webElement)
+        {
+            string mouseHoverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover',true, false);" +
+                " arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+
+            execScript(mouseHoverScript, webElement);
+        }
+
+        public bool isImportantField(IWebElement element)
+        {
+            try
+            {
+                var x = element.FindElement(By.XPath("//*[text()='*']"));
+                return x.Displayed;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public IWebElement FindTitleTagless(string title)
+        {
+            return FindXPath("//*[@title='" + title + "']");
         }
     }
 }

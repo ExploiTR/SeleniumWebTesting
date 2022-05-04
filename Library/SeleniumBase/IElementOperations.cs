@@ -22,7 +22,11 @@ namespace SeleniumBase
         IWebElement FindPartialLinkText(string plt);
         IWebElement FindWithInElement(By by, IWebElement element);
         IWebElement FindText(string tag,string text);
+
+
         IWebElement FindTextTagless(string text);
+        IWebElement FindClassesTagLess(string className);
+        IWebElement FindTitleTagless(string title);
 
         ReadOnlyCollection<IWebElement> FindAllBy(By by);
 

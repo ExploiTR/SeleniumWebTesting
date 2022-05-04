@@ -11,6 +11,8 @@ namespace SeleniumBase
 
         void contextClick(IWebElement element);
 
+        void controlClick(IWebElement element);
+
         void testHorizontalMovement(IWebElement element, int minPX, int maxPX);
 
         void testVerticalMovement(IWebElement element, int minPY, int maxPY);
@@ -21,7 +23,7 @@ namespace SeleniumBase
 
         void dragAndDropOffset(IWebElement movable, int offX, int offY);
 
-        void sendKeysWithAction(IWebElement element, string key);
+        void sendKeysWithAction(string key);
 
         void PressKeys(IWebElement element, string key);
 
@@ -32,5 +34,7 @@ namespace SeleniumBase
         Actions moveToElementAndClick(IWebElement webElement);
 
         void hoverOnto(IWebElement webElement);
+
+        void hoverOntoJS(IWebElement webElement);
     }
 }
