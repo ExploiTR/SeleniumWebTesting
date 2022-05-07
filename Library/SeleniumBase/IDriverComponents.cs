@@ -1,11 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SeleniumBase
 {
@@ -25,11 +18,11 @@ namespace SeleniumBase
 
         void exit();
 
-        void execScript(string script, params object[] args);
+        void navigateBack();
 
-        void scrollPage(int hz, int ver);
+        void navigateForward();
 
-        void scrollForElementVisibility(IWebElement element);
+        void exitPrompt();
 
         IWebElement switchToActive();
 
@@ -48,5 +41,7 @@ namespace SeleniumBase
         IWebDriver switchToParentFrame();
 
         void switchToWindow(int index);
+
+        void waitForPageLoad();
     }
 }

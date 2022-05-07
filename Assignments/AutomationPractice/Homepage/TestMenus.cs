@@ -1,11 +1,6 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Internal;
 using SeleniumBase;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomationPractice.Homepage
 {
@@ -47,13 +42,13 @@ namespace AutomationPractice.Homepage
 
             testAddtoCart(curElement);
 
-            testQuickView(curElement,cards.Count);
+            testQuickView(curElement, cards.Count);
 
         }
 
-        private void testQuickView(IWebElement curElement,int count)
+        private void testQuickView(IWebElement curElement, int count)
         {
-            hoverOnto(FindAllBy(By.XPath("//ul[@id='homefeatured']//div"))[count-1]);
+            hoverOnto(FindAllBy(By.XPath("//ul[@id='homefeatured']//div"))[count - 1]);
 
             wait_5();
 

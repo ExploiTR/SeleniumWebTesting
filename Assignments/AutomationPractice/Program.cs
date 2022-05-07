@@ -1,11 +1,4 @@
-﻿using AutomationPractice.Homepage;
-using AutomationPractice.TestCategories;
-using AutomationPractice.UserAccounts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutomationPractice.TestCases;
 
 namespace AutomationPractice
 {
@@ -13,13 +6,14 @@ namespace AutomationPractice
     {
         static void Main(string[] args)
         {
-            //  new TestSearchbar();
-            //   new TestMenus();
-            //new TestCart();
-
-            //new Registration();
-            //new AccountDetails();
-            new WomenDresses();
+            //new TestCase1();
+            //new TestCase2();
+            //new TestCase3();
+            //new TestCase4();
+            //new TestCase5();
+            //new TestCase6();
+            //new TestCase7();
+            //new TestCase8();
         }
     }
 }

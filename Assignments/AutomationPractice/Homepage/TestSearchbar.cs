@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using SeleniumBase;
-using System;
 
 namespace AutomationPractice.Homepage
 {

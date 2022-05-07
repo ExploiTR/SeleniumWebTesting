@@ -49,12 +49,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IByWrapper.cs" />
     <Compile Include="IConditions.cs" />
     <Compile Include="DriverConfig.cs" />
     <Compile Include="IActionComponents.cs" />
     <Compile Include="IControlFunctions.cs" />
     <Compile Include="IDriverComponents.cs" />
     <Compile Include="IElementOperations.cs" />
+    <Compile Include="IJavaScriptComponents.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="SelActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

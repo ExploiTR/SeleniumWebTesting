@@ -34,7 +34,5 @@ namespace SeleniumBase
         Actions moveToElementAndClick(IWebElement webElement);
 
         void hoverOnto(IWebElement webElement);
-
-        void hoverOntoJS(IWebElement webElement);
     }
 }

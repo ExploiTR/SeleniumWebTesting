@@ -1,32 +1,44 @@
 ﻿using OpenQA.Selenium;
 using SeleniumBase;
+using System;
 
-namespace AutomationPractice.UserAccounts
+namespace AutomationPractice.TestCases
 {
-    internal class Registration : SelActions
+    internal class TestCase1 : SelActions
     {
-        public Registration()
+        public TestCase1()
         {
-            //  signUp();
-            login();
-            exit();
+            open("http://automationpractice.com/index.php");
+            signUp();
+            verifyTestCase();
         }
 
-        private void login()
+        private void verifyTestCase()
         {
-            open("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+            int waitMax = 10;
+            while (!getDriver().Url.Contains("controller=my-account"))
+            {
+                wait1s();
+                waitMax--;
+                if (waitMax == 0)
+                    break;
+            }
 
-            FindID("email").SendKeys("trennis.jazon@whoisox.com");
-            FindID("passwd").SendKeys("demopass");
-
-            FindID("SubmitLogin").Click();
+            if (elementExists(By.XPath("//p[contains(text(),'Welcome to your account')]")))
+            {
+                Console.WriteLine("User Verified,Test case Passed");
+            }
+            else
+            {
+                Console.WriteLine("User Verification Failed,Test case Failed");
+            }
         }
 
         private void signUp()
         {
             open("http://automationpractice.com/index.php?controller=authentication&back=my-account");
 
-            FindID("email_create").SendKeys("trennis.jazon@whoisox.com");
+            FindID("email_create").SendKeys("trennis.jazzx@whoisox.com");
 
             FindID("SubmitCreate").Click();
 

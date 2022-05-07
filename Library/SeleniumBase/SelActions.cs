@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -8,7 +9,8 @@ using System.Threading;
 
 namespace SeleniumBase
 {
-    public class SelActions : IDriverComponents, IElementOperations, IControlFunctions, IActionComponents, IConditions
+    public class SelActions : IDriverComponents, IElementOperations, IControlFunctions,
+        IActionComponents, IConditions, IByWrapper, IJavaScriptComponents
     {
         private IWebDriver driver = null;
         private IWebDriver lastInstance = null;
@@ -104,6 +106,16 @@ namespace SeleniumBase
                 lastInstance.Quit();
         }
 
+        public void exitPrompt()
+        {
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+            if (driver != null)
+                driver.Quit();
+            if (lastInstance != null)
+                lastInstance.Quit();
+        }
+
         public void click(By by)
         {
             driver.FindElement(by).Click();
@@ -173,7 +185,7 @@ namespace SeleniumBase
 
         public IWebElement FindText(string tag, string text)
         {
-            return driver.FindElement(By.XPath("//" + tag + "[text()='" + text + "']"));
+            return driver.FindElement(By.XPath("//" + tag + "[contains(text(),'" + text + "') or text()='" + text + "']"));
         }
 
         public IWebElement FindTag(string id)
@@ -363,7 +375,7 @@ namespace SeleniumBase
         {
             do
             {
-                scrollPage(0, 1);
+                scrollPage(0, 10);
             } while (!element.Displayed || !element.Enabled);
         }
 
@@ -439,7 +451,6 @@ namespace SeleniumBase
 
         public bool testForValidLink(string link)
         {
-            //problem : broken link has 200 response and content-length
             try
             {
                 HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(link);
@@ -457,7 +468,6 @@ namespace SeleniumBase
 
         public bool testForValidImage(string link)
         {
-            //problem : broken image has 200 response and content-length
             try
             {
                 HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(link);
@@ -557,6 +567,75 @@ namespace SeleniumBase
         public IWebElement FindTitleTagless(string title)
         {
             return FindXPath("//*[@title='" + title + "']");
+        }
+
+        public void waitForPageLoad()
+        {
+            wait_5();
+            IWait<IWebDriver> wait = new WebDriverWait(getDriver(), TimeSpan.FromSeconds(30.00));
+            wait.Until(driver1 => ((IJavaScriptExecutor)getDriver()).ExecuteScript("return document.readyState").Equals("complete"));
+            wait_5();
+            switchToActive();
+        }
+
+        public By ClassName(string classNameToFind)
+        {
+            return By.ClassName(classNameToFind);
+        }
+
+        public By CssSelector(string cssSelectorToFind)
+        {
+            return By.CssSelector(cssSelectorToFind);
+        }
+
+        public By Id(string idToFind)
+        {
+            return By.Id(idToFind);
+        }
+
+        public By LinkText(string linkTextToFind)
+        {
+            return By.LinkText(linkTextToFind);
+        }
+
+        public By Name(string nameToFind)
+        {
+            return By.Name(nameToFind);
+        }
+
+        public By PartialLinkText(string partialLinkTextToFind)
+        {
+            return By.PartialLinkText(partialLinkTextToFind);
+        }
+
+        public By TagName(string tagNameToFind)
+        {
+            return By.TagName(tagNameToFind);
+        }
+
+        public By XPath(string xpathToFind)
+        {
+            return By.XPath(xpathToFind);
+        }
+
+        public object execScriptRet(string script, params object[] args)
+        {
+            return ((IJavaScriptExecutor)driver).ExecuteScript(script, args);
+        }
+
+        public string getTextJS(IWebElement element)
+        {
+            return ((string)execScriptRet("return arguments[0].textContent", element)).Trim();
+        }
+
+        public void navigateBack()
+        {
+            driver.Navigate().Back();
+        }
+
+        public void navigateForward()
+        {
+            driver.Navigate().Forward();
         }
     }
 }
