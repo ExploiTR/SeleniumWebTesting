@@ -57,7 +57,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OpenMRS\TestCase1.cs" />
+    <Compile Include="GoDaddyTests\TC1.cs" />
+    <Compile Include="GoDaddyTests\TC2.cs" />
+    <Compile Include="GoDaddyTests\TC3.cs" />
+    <Compile Include="GoDaddyTests\TC6.cs" />
+    <Compile Include="GoDaddyTests\TC5.cs" />
+    <Compile Include="GoDaddyTests\TC4.cs" />
+    <Compile Include="LetsCodeItTests.cs" />
+    <Compile Include="OpenMRSTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

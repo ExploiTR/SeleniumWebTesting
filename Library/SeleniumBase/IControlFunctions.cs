@@ -27,5 +27,7 @@ namespace SeleniumBase
         bool testForValidLink(string link);
 
         bool testForValidImage(string link);
+
+        void print(string what);
     }
 }

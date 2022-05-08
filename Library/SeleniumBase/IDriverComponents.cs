@@ -6,6 +6,8 @@ namespace SeleniumBase
     {
         void open(string link);
 
+        void openWithCurrentDriver(string link);
+
         void open(string link, DriverConfig config);
 
         void openWindow(string link);
@@ -23,6 +25,10 @@ namespace SeleniumBase
         void navigateForward();
 
         void exitPrompt();
+
+        string getCurrentPageTitle();
+
+        string getCurrentPageUrl();
 
         IWebElement switchToActive();
 

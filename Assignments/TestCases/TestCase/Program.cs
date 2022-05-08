@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TestCase.GoDaddyTests;
 
-namespace TestCase
+namespace TestCases
 {
     class Program
     {
         static void Main(string[] args)
         {
-
+         /*   new TC1();
+            new TC2();
+            new TC3();
+            new TC4();
+            new TC5();*/
+            new TC6();
         }
     }
 }

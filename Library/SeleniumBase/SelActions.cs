@@ -72,6 +72,11 @@ namespace SeleniumBase
             driver.Navigate().GoToUrl(link);
         }
 
+        public void openWithCurrentDriver(string link)
+        {
+            driver.Navigate().GoToUrl(link);
+        }
+
         public void openWindow(string link)
         {
             initNewWindow();
@@ -636,6 +641,21 @@ namespace SeleniumBase
         public void navigateForward()
         {
             driver.Navigate().Forward();
+        }
+
+        public void print(string what)
+        {
+            Console.WriteLine(what);
+        }
+
+        public string getCurrentPageTitle()
+        {
+            return driver.Title;
+        }
+
+        public string getCurrentPageUrl()
+        {
+            return driver.Url;
         }
     }
 }
