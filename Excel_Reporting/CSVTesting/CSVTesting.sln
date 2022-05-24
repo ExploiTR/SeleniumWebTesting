@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVTesting", "CSVTesting\CSVTesting.csproj", "{932F6872-4A34-4805-9D52-3FE9844782DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{932F6872-4A34-4805-9D52-3FE9844782DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{932F6872-4A34-4805-9D52-3FE9844782DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{932F6872-4A34-4805-9D52-3FE9844782DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{932F6872-4A34-4805-9D52-3FE9844782DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDE68436-B95B-4F2F-8463-DFDC55CD834B}
+	EndGlobalSection
+EndGlobal

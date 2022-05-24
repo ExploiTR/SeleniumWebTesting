@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<users>
+	<user>
+		<Name>Aftab</Name>
+		<Email>a@a.com</Email>
+		<CA>Pat</CA>
+		<PA>INDIA</PA>
+	</user>
+	<user>
+		<Name>Pratim</Name>
+		<Email>b@b.com</Email>
+		<CA>Kol</CA>
+		<PA>INDIA</PA>
+	</user>
+	<user>
+		<Name>Rachit</Name>
+		<Email>c@c.com</Email>
+		<CA>Dhan</CA>
+		<PA>INDIA</PA>
+	</user>
+</users>
