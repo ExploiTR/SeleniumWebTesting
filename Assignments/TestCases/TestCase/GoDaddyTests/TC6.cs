@@ -14,7 +14,7 @@ namespace TestCase.GoDaddyTests
          * 2. Open website url - https://godaddy.com/
          * 3. Maximize browser window.
          * 4. Set timeout using implicit wait command of Selenium Webdriver.
-         * 5.Click on the first link from the menu, it will open up the sub-menu with multiple sub-menu links.
+         * 5. Click on the first link from the menu, it will open up the sub-menu with multiple sub-menu links.
          * 6. Click on the first sub-menu link.
          * 7. Get the page title and validate it.
          * 8. Go back to the home page by clicking on the GoDaddy logo.

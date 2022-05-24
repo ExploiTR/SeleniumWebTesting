@@ -1,7 +1,21 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
+using NUnit;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports;
 using SeleniumBase;
-using System;
+using System.Diagnostics;
+using Assert = NUnit.Framework.Assert;
 
 namespace TestCases
 {
@@ -28,10 +42,23 @@ namespace TestCases
     class LetsCodeItTests : SelActions
     {
 
+        public static ExtentTest Test;
+        public static ExtentReports Extent;
+
         [OneTimeSetUp]
         public void setup()
         {
             open("https://courses.letskodeit.com/practice");
+
+            Extent = new ExtentReports();
+
+            var HtmlReporter = new ExtentHtmlReporter(@"D:\ReportsResults\Report" + DateTime.Now.ToString("_MMddyyyy_hhmmtt") + ".html");
+
+            Extent.AttachReporter(HtmlReporter);
+
+            Test = Extent.CreateTest("T001");
+            Test.Info("LetsKodeIT");
+            
         }
 
         [Test, Order(1)]
@@ -42,6 +69,8 @@ namespace TestCases
             FindID("benzradio").Click();
             wait1s();
             FindID("hondaradio").Click();
+
+            Test.CreateNode("TestRadios()", "Method").Pass("Pass");
         }
 
         [Test, Order(2)]
@@ -49,6 +78,8 @@ namespace TestCases
         {
             FindID("carselect").Click();
             FindID("carselect").SendKeys(Keys.ArrowDown + Keys.Enter);
+
+            Test.CreateNode("TestSelect()", "Method").Pass("Pass");
         }
 
         [Test, Order(3)]
@@ -60,6 +91,9 @@ namespace TestCases
                 .Click(all[0])
                 .Click(all[1])
                 .Click(all[2]).KeyUp(Keys.LeftControl).Build().Perform();
+
+
+            Test.CreateNode("TestMulSelect()", "Method").Pass("Pass");
         }
 
         [Test, Order(4)]
@@ -70,6 +104,9 @@ namespace TestCases
             FindID("benzcheck").Click();
             wait1s();
             FindID("hondacheck").Click();
+
+
+            Test.CreateNode("TestCheckBoxes()", "Method").Pass("Pass");
         }
 
         [Test, Order(5)]
@@ -84,6 +121,9 @@ namespace TestCases
             switchToWindow(0);
             switchToDefault();
             Assert.That(getDriver().WindowHandles.Count == 1);
+
+
+            Test.CreateNode("TestWindows()", "Method").Pass("Pass");
         }
 
         [Test, Order(6)]
@@ -98,6 +138,9 @@ namespace TestCases
             switchToWindow(0);
             switchToDefault();
             Assert.That(getDriver().WindowHandles.Count == 1);
+
+
+            Test.CreateNode("TestNewTabs()", "Method").Pass("Pass");
         }
 
         [Test, Order(7)]
@@ -109,12 +152,17 @@ namespace TestCases
             var al = switchToAlert();
             Assert.That(al.Text.Contains("Aceu"));
             al.Accept();
+
+
+            Test.CreateNode("TestAlert()", "Method").Pass("Pass");
         }
 
         [Test, Order(8)]
         public void TestTable()
         {
             Assert.That(elementExists(XPath("//table[@id='product']//tr//td[@class='author-name'][1]")));
+
+            Test.CreateNode("TestTable()", "Method").Pass("Pass");
         }
 
         [Test, Order(9)]
@@ -137,6 +185,8 @@ namespace TestCases
             catch (Exception) {
                 Assert.That(true);
             }
+
+            Test.CreateNode("TestEnableDisableInput()", "Method").Pass("Pass");
         }
 
         [Test, Order(10)]
@@ -149,6 +199,9 @@ namespace TestCases
             wait_5();
 
             Assert.That(!FindID("displayed-text").Displayed);
+
+
+            Test.CreateNode("TestDisplayElement()", "Method").Pass("Pass");
         }
 
         [Test, Order(11)]
@@ -159,12 +212,20 @@ namespace TestCases
             switchToActive();
             wait_5();
             Assert.That(elementExists(XPath("//*[text()='Reload']")));
+
+
+            Test.CreateNode("TestHoverElement()", "Method").Pass("Pass");
         }
 
         [OneTimeTearDown]
         public void Exit()
         {
+            Test.Log(Status.Pass, "Test Pass");
+            Extent.Flush();
             exit();
+            wait1s();
+
+            Process.Start("CMD.exe", "/C start D:\\ReportsResults\\index.html");
         }
     }
 }
